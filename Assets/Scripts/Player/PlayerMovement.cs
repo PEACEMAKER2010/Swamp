@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private float moveSpeed = 18f;
+    private float moveSpeed = 10f;
     private bool isFacingRight = true;
 
     private Vector2 movementVector;
@@ -13,8 +13,13 @@ public class PlayerMovement : MonoBehaviour
     private InputAction moveAction;
     private InputAction shootAction;
 
+    private State playerState;
+
+    public State PlayerState { get { return playerState;  } private set { playerState = value;  } }
+
     [SerializeField] private Rigidbody2D playerRigidBody;
     [SerializeField] private BoxCollider2D playerCollider;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -26,16 +31,18 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move();
+        Walk();
         Flip();
+        CheckIfIdling();
 
         mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
     }
 
-    private void Move()
+    private void Walk()
     {
         movementVector = moveAction.ReadValue<Vector2>() * moveSpeed;
         playerRigidBody.linearVelocity = movementVector;
+        playerState = State.Walking;
     }
 
     private void Flip()
@@ -53,5 +60,23 @@ public class PlayerMovement : MonoBehaviour
             isFacingRight = !isFacingRight;
             transform.Rotate(0, 180, 0);
         }
+    }
+
+    private void CheckIfIdling()
+    {
+       if (movementVector == Vector2.zero)
+       {
+            playerState = State.Idling;
+       }
+    }
+
+    public enum State
+    {
+        Idling,
+        Walking,
+        Shooting,
+        Hurting,
+        Healing,
+        Dying
     }
 }
