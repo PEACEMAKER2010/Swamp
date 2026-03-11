@@ -7,8 +7,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isFacingRight = true;
 
     private Vector2 movementVector;
-
-    private Vector3 mousePos;
+    private Vector2 mousePos;
 
     private InputAction moveAction;
     private InputAction shootAction;
@@ -19,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private Rigidbody2D playerRigidBody;
     [SerializeField] private BoxCollider2D playerCollider;
+    [SerializeField] private Transform playerTransform;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Walk();
         Flip();
-        CheckIfIdling();
+        CheckMovementState();
 
         mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
     }
@@ -42,13 +42,12 @@ public class PlayerMovement : MonoBehaviour
     {
         movementVector = moveAction.ReadValue<Vector2>() * moveSpeed;
         playerRigidBody.linearVelocity = movementVector;
-        playerState = State.Walking;
     }
 
     private void Flip()
     {
 
-        float angle = Mathf.Atan2(mousePos.x, mousePos.y) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(mousePos.x - playerTransform.position.x, mousePos.y - playerTransform.position.y) * Mathf.Rad2Deg;
 
         if (angle < 0 && isFacingRight)
         {
@@ -62,13 +61,18 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void CheckIfIdling()
+    private void CheckMovementState()
     {
        if (movementVector == Vector2.zero)
        {
             playerState = State.Idling;
        }
+       else if (!movementVector.Equals(Vector2.zero))
+       {
+            playerState |= State.Walking;
+       }
     }
+
 
     public enum State
     {
