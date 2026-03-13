@@ -6,6 +6,8 @@ public class PlayerMovement : MonoBehaviour
     private float moveSpeed = 10f;
     private bool isFacingRight = true;
 
+    public bool IsFacingRight { get { return isFacingRight; } private set { isFacingRight = value;  } }
+
     private Vector2 movementVector;
     private Vector2 mousePos;
 
@@ -16,9 +18,9 @@ public class PlayerMovement : MonoBehaviour
 
     public State PlayerState { get { return playerState;  } private set { playerState = value;  } }
 
-    [SerializeField] private Rigidbody2D playerRigidBody;
-    [SerializeField] private BoxCollider2D playerCollider;
-    [SerializeField] private Transform playerTransform;
+    [SerializeField] Rigidbody2D playerRigidBody;
+    [SerializeField] BoxCollider2D playerCollider;
+    [SerializeField] Transform playerTransform;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -52,12 +54,12 @@ public class PlayerMovement : MonoBehaviour
         if (angle < 0 && isFacingRight)
         {
             isFacingRight = !isFacingRight;
-            transform.Rotate(0, 180, 0);
+            transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
         }
         else if (angle > 0 && isFacingRight == false)
         {
             isFacingRight = !isFacingRight;
-            transform.Rotate(0, 180, 0);
+            transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
         }
     }
 

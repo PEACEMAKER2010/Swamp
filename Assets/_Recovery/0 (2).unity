@@ -124,11 +124,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5167351380240492336, guid: 2f49bfdad47667148bf55f473febea84, type: 3}
   m_PrefabInstance: {fileID: 1586417052702015834}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &233444460 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8606417397769750153, guid: 2f49bfdad47667148bf55f473febea84, type: 3}
-  m_PrefabInstance: {fileID: 1586417052702015834}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -569,10 +564,6 @@ PrefabInstance:
       propertyPath: shotgunTransform
       value: 
       objectReference: {fileID: 1961920045}
-    - target: {fileID: 4179189988000234983, guid: 2f49bfdad47667148bf55f473febea84, type: 3}
-      propertyPath: shotgunSpriteTransform
-      value: 
-      objectReference: {fileID: 233444460}
     - target: {fileID: 4211442509365708657, guid: 2f49bfdad47667148bf55f473febea84, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.466
