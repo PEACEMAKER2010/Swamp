@@ -566,10 +566,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 93160208}
     - target: {fileID: 4179189988000234983, guid: 2f49bfdad47667148bf55f473febea84, type: 3}
-      propertyPath: shotgunAnimator
-      value: 
-      objectReference: {fileID: 1586417052702015836}
-    - target: {fileID: 4179189988000234983, guid: 2f49bfdad47667148bf55f473febea84, type: 3}
       propertyPath: shotgunTransform
       value: 
       objectReference: {fileID: 1961920045}

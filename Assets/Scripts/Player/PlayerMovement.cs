@@ -12,7 +12,6 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 mousePos;
 
     private InputAction moveAction;
-    private InputAction shootAction;
 
     private State playerState;
 
@@ -27,7 +26,6 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         moveAction = InputSystem.actions.FindAction("Move");
-        shootAction = InputSystem.actions.FindAction("Shoot");
     }   
 
     // Update is called once per frame
