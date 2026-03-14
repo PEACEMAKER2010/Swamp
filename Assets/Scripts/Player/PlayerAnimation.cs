@@ -50,8 +50,8 @@ public class PlayerAnimation : MonoBehaviour
         var state = GetPlayerState();
 
         if (state == currentState) return;
-        playerAnimator.CrossFade(state, 0, 0);
         currentState = state;
+        playerAnimator.CrossFade(state, 0, 0);
     }
 
     

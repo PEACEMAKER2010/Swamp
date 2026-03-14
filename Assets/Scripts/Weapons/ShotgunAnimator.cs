@@ -1,8 +1,10 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class ShotgunAniamtor : MonoBehaviour
+public class ShotgunAnimator : MonoBehaviour
 {
+    private bool locked;
+
     private float lockedTill;
     private float shootAnimDuration = 0.7167f;
 
@@ -13,6 +15,7 @@ public class ShotgunAniamtor : MonoBehaviour
     // ShotgunStates
 
     private int currentState;
+    private int lockedState;
     public static readonly int Idle = Animator.StringToHash("Idle");
     public static readonly int Shoot = Animator.StringToHash("Shotgun Shoot");
 
@@ -30,21 +33,6 @@ public class ShotgunAniamtor : MonoBehaviour
         AnimateShotgun();
     }
 
-    private int GetState()
-    {
-        if (Time.time < lockedTill) return currentState;
-
-        if (shootAction.IsPressed()) return LockState(Shoot, shootAnimDuration);
-
-        return Idle;
-
-        int LockState(int state, float time)
-        {
-            lockedTill = Time.time + time;
-            return state;
-        }
-    }
-
     private void AnimateShotgun()
     {
         var state = GetState();
@@ -53,4 +41,19 @@ public class ShotgunAniamtor : MonoBehaviour
         shotgunAnimator.CrossFade(state, 0, 0);
         currentState = state;
     }
+
+    private int GetState()
+    {
+        if (Time.time < lockedTill) return currentState;
+
+        if (shootAction.WasPressedThisFrame()) return LockState(Shoot, shootAnimDuration);
+
+        return Idle;
+
+        int LockState(int state, float time)
+        {
+            lockedTill = Time.time + time;
+            return state;
+        }
+    } 
 }
