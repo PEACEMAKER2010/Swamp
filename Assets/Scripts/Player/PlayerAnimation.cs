@@ -1,36 +1,58 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.InputSystem.XR.Haptics;
 
 public class PlayerAnimation : MonoBehaviour
 {
-    private PlayerMovement playerMovement;
+    private float lockedTill;
 
-    private Animator playerAnimator;
+    private Vector2 playerMovementVector;
 
-    private int playerStateValue;
+    // Player States
+    private int currentState;
+    public static readonly int Idle = Animator.StringToHash("Idle");
+    public static readonly int Walk = Animator.StringToHash("Walk");
+
+    [SerializeField] PlayerMovement playerMovement;
+    [SerializeField] Animator playerAnimator;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        playerMovement = GetComponent<PlayerMovement>();
+        //playerMovement = GetComponent<PlayerMovement>();
 
-        playerAnimator = GetComponent<Animator>();
+        //playerAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        SetPlayerStateInt();
+        AnimatePlayer();
+
+        playerMovementVector = playerMovement.PlayerMovementVector;
     }
 
-    private void CheckPlayerState()
+    private int GetPlayerState()
     {
-        playerStateValue = (int)playerMovement.PlayerState;
+        // if (Time.time < lockedTill) return currentState;
+
+        return playerMovementVector == Vector2.zero ? Idle : Walk;
+
+        //int LockState(int state, float time)
+        //{
+        //    lockedTill = Time.time + time;
+        //    return state;
+        //}
     }
 
-    private void SetPlayerStateInt()
+    private void AnimatePlayer()
     {
-        CheckPlayerState();
+        var state = GetPlayerState();
 
-        playerAnimator.SetInteger("PlayerStateInt", playerStateValue);
+        if (state == currentState) return;
+        playerAnimator.CrossFade(state, 0, 0);
+        currentState = state;
     }
+
+    
 }

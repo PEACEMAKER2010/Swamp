@@ -1,9 +1,12 @@
+using System.Net;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class ShotgunController : MonoBehaviour
 {
     private bool isFlipped = false;
+    private bool canShoot = true;
 
     private float nextShotTime;
     private float timeBetweenShots;
@@ -20,15 +23,13 @@ public class ShotgunController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        shootAction = InputSystem.actions.FindAction("Shoot");
+        shootAction = InputSystem.actions.FindAction("Attack");
     }
 
     // Update is called once per frame
     void Update()
     {
         RotateShotgun();
-
-        ShootShotgun();
     }
 
     private void GetMousePos()
@@ -63,13 +64,6 @@ public class ShotgunController : MonoBehaviour
 
     }
 
-    private void ShootShotgun()
-    {
-        if (shootAction.IsPressed())
-        {
-            shotgunAnimator.SetTrigger("shootShotgun");
-        }
-    }
 
     private float ClampShotgunAngle(float angle, float lowRight, float highRight, float lowLeft, float highLeft, bool isGunFacingRight)
     {

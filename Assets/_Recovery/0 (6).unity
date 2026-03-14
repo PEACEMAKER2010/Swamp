@@ -305,8 +305,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7171fba3d6e84bb489cce3b19a9f505e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  playerMovement: {fileID: 530115772}
-  playerAnimator: {fileID: 530115762}
 --- !u!4 &530115771 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1329000195807361638, guid: 2f49bfdad47667148bf55f473febea84, type: 3}
@@ -648,9 +646,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7916296673436655521, guid: 2f49bfdad47667148bf55f473febea84, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1586417052702015836}
-    - targetCorrespondingSourceObject: {fileID: 7916296673436655521, guid: 2f49bfdad47667148bf55f473febea84, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1586417052702015838}
   m_SourcePrefab: {fileID: 100100000, guid: 2f49bfdad47667148bf55f473febea84, type: 3}
 --- !u!1 &1586417052702015835 stripped
 GameObject:
@@ -679,18 +674,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1586417052702015838
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1586417052702015835}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd0caa3bfd394a6419df463497297b56, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ShotgunAniamtor
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

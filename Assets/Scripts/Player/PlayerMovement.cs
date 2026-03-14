@@ -8,14 +8,12 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsFacingRight { get { return isFacingRight; } private set { isFacingRight = value;  } }
 
-    private Vector2 movementVector;
+    private Vector2 playerMovementVector;
     private Vector2 mousePos;
 
     private InputAction moveAction;
 
-    private State playerState;
-
-    public State PlayerState { get { return playerState;  } private set { playerState = value;  } }
+    public Vector2 PlayerMovementVector { get { return playerMovementVector;  } private set { playerMovementVector = value;  } }
 
     [SerializeField] Rigidbody2D playerRigidBody;
     [SerializeField] BoxCollider2D playerCollider;
@@ -33,15 +31,14 @@ public class PlayerMovement : MonoBehaviour
     {
         Walk();
         Flip();
-        CheckMovementState();
 
         mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
     }
 
     private void Walk()
     {
-        movementVector = moveAction.ReadValue<Vector2>() * moveSpeed;
-        playerRigidBody.linearVelocity = movementVector;
+        playerMovementVector = moveAction.ReadValue<Vector2>() * moveSpeed;
+        playerRigidBody.linearVelocity = playerMovementVector;
     }
 
     private void Flip()
@@ -59,28 +56,5 @@ public class PlayerMovement : MonoBehaviour
             isFacingRight = !isFacingRight;
             transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
         }
-    }
-
-    private void CheckMovementState()
-    {
-       if (movementVector == Vector2.zero)
-       {
-            playerState = State.Idling;
-       }
-       else if (!movementVector.Equals(Vector2.zero))
-       {
-            playerState |= State.Walking;
-       }
-    }
-
-
-    public enum State
-    {
-        Idling,
-        Walking,
-        Shooting,
-        Hurting,
-        Healing,
-        Dying
     }
 }
