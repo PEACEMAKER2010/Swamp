@@ -1,6 +1,7 @@
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem.XR.Haptics;
+using Gameplay.Player.Movement;
 
 public class PlayerAnimation : MonoBehaviour
 {

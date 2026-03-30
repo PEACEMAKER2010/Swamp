@@ -6,7 +6,7 @@ public class ShotgunAnimator : MonoBehaviour
     private bool locked;
 
     private float lockedTill;
-    private float shootAnimDuration = 0.7167f;
+    private float shootAnimDuration = 0.6f;
 
     private InputAction shootAction;
 
@@ -17,7 +17,7 @@ public class ShotgunAnimator : MonoBehaviour
     private int currentState;
     private int lockedState;
     public static readonly int Idle = Animator.StringToHash("Idle");
-    public static readonly int Shoot = Animator.StringToHash("Shotgun Shoot");
+    public static readonly int Shoot = Animator.StringToHash("Shoot");
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

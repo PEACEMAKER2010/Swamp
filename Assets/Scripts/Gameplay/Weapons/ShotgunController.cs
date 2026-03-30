@@ -2,6 +2,7 @@ using System.Net;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Gameplay.Player.Movement;
 
 public class ShotgunController : MonoBehaviour
 {
